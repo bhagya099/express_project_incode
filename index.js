@@ -40,15 +40,6 @@ app.get('/users/0/schedules', (req, res) => {
     }
 });
 
-app.get('/users/1/schedules', (req, res) => {
-    let id = 1;
-    const found = data.schedules.some((schedule) => schedule.user_id === id);
-    if (found) {
-        res.send(data.schedules.filter((schedule) => schedule.user_id === id))
-    } else {
-        res.status(400).json({ msg: `No number with the id ${req.params.id}` });
-    }
-})
 
 app.get('/users/2/schedules', (req, res) => {
     let id = 2;
