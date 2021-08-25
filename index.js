@@ -3,6 +3,10 @@ const app = express();
 const PORT = 5000;
 const data = require("./data");
 
+// body parser midlle ware
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // routes
 
 app.get("/", (req, res) => {
@@ -17,40 +21,31 @@ app.get("/schedules", (req, res) => {
     res.send(data.schedules);
 });
 
-// for getting by user number
-app.get("/users/0", (req, res) => {
-    res.send(data.users[0]);
+// for getting by user id number
+app.get("/users/:id", (req, res) => {
+    res.send(data.users[req.params.id]);
 });
 
-app.get("/users/1", (req, res) => {
-    res.send(data.users[1]);
-});
-app.get("/users/2", (req, res) => {
-    res.send(data.users[2]);
-});
-
-// getting schedule by id 
-app.get('/users/0/schedules', (req, res) => {
-    let id = 0;
-    const found = data.schedules.some((schedule) => schedule.user_id === id);
+// getting schedule by id
+app.get("/users/:id/schedules", (req, res) => {
+    // let id = 0;
+    const found = data.schedules.some(
+        (schedule) => schedule.user_id === Number(req.params.id)
+    );
     if (found) {
-        res.send(data.schedules.filter((schedule) => schedule.user_id === id))
+        res.send(
+            data.schedules.filter(
+                (schedule) => schedule.user_id === Number(req.params.id)
+            )
+        );
     } else {
         res.status(400).json({ msg: `No number with the id ${req.params.id}` });
     }
 });
-
-
-app.get('/users/2/schedules', (req, res) => {
-    let id = 2;
-    const found = data.schedules.some((schedule) => schedule.user_id === id);
-    if (found) {
-        res.send(data.schedules.filter((schedule) => schedule.user_id === id))
-    } else {
-        res.status(400).json({ msg: `No number with the id ${req.params.id}` });
-    }
-})
-
+// post request
+app.post("/users", (req, res) => {
+    res.json(req.body);
+});
 
 app.listen(PORT, () => {
     console.log(`you port is http://localhost:${PORT}`);
