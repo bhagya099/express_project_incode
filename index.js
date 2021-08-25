@@ -51,8 +51,9 @@ app.post("/users", (req, res) => {
         firstname,
         lastname,
         email,
-        password,
+        password: hash,
     };
+    data.users.push(newUser);
     res.json(newUser);
     res.json(req.body);
 });
