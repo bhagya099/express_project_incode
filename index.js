@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express();
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 const data = require("./data");
-
+const bcrypt = require("bcrypt");
 // body parser midlle ware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -44,6 +44,16 @@ app.get("/users/:id/schedules", (req, res) => {
 });
 // post request
 app.post("/users", (req, res) => {
+    const { firstname, lastname, email, password } = req.body;
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(password, salt);
+    const newUser = {
+        firstname,
+        lastname,
+        email,
+        password,
+    };
+    res.json(newUser);
     res.json(req.body);
 });
 
