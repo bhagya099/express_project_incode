@@ -11,9 +11,15 @@ app.use(express.urlencoded({ extended: false }));
 // ejs
 
 app.set("view engine", "ejs");
-
 app.use(express.static("public"));
+// for getting form for new users
+app.get("/new", (req, res) => {
+    res.render("pages/form");
+});
 
+app.get("/schedules/new", (req, res) => {
+    res.render("pages/create_schedules");
+});
 // routes
 // rendering the index page
 app.get("/", (req, res) => {
@@ -56,6 +62,7 @@ app.get("/users/:id/schedules", (req, res) => {
         res.status(400).json({ msg: `No number with the id ${req.params.id}` });
     }
 });
+
 // post request
 app.post("/users", (req, res) => {
     const { firstname, lastname, email, password } = req.body;
@@ -74,8 +81,6 @@ app.post("/users", (req, res) => {
     // res.json(req.body);
     res.json(data.users);
 });
-
-
 
 app.listen(PORT, () => {
     console.log(`you port is http://localhost:${PORT}`);
