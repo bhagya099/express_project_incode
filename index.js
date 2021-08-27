@@ -3,6 +3,8 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const data = require("./data");
 const bcrypt = require("bcrypt");
+const parsers = require("body-parser");
+
 // body parser midlle ware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -54,8 +56,11 @@ app.post("/users", (req, res) => {
         password: hash,
     };
     data.users.push(newUser);
-    res.json(newUser);
-    res.json(req.body);
+    // res.json(newUser);
+    // console.log(req.body);
+    // console.log(newUser);
+    // res.json(req.body);
+    res.json(data.users);
 });
 
 app.listen(PORT, () => {
