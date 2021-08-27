@@ -23,7 +23,7 @@ app.get("/schedules", (req, res) => {
     res.send(data.schedules);
 });
 
-// for getting by user id number
+// for getting users by user id number
 app.get("/users/:id", (req, res) => {
     res.send(data.users[req.params.id]);
 });
