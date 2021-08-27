@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- it is a header -->
+    <h6>here is menu</h6>
+    <%- include('../partials/header') %>
+        <h1>It's a users page</h1>
+        <main>
+            <% users.forEach(user=> { %>
+                <p>
+                    <strong>
+                        <%= `${user.firstname} ${user.lastname}` %>
+                    </strong><br>
+
+                    <%= `${user.email}` %><br>
+                        <%= `${user.password}` %>
+                </p>
+                <% }) %>
+                    <!-- <p>
+                        <%= users %>
+                    </p> -->
+        </main>
+</body>
+
+</html>

@@ -1,22 +1,30 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 const data = require("./data");
 const bcrypt = require("bcrypt");
-
 
 // body parser midlle ware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// routes
+// ejs
 
+app.set("view engine", "ejs");
+
+app.use(express.static("public"));
+
+// routes
+// rendering the index page
 app.get("/", (req, res) => {
-    res.send(`<h1>Welcome to our schedule website</h1>`);
+    // res.send(`<h1>Welcome to our schedule website</h1>`);
+    res.render("pages/index");
 });
 
 app.get("/users", (req, res) => {
-    res.send(data.users);
+    res.render("pages/users", {
+        users: data.users,
+    });
 });
 
 app.get("/schedules", (req, res) => {
@@ -62,6 +70,8 @@ app.post("/users", (req, res) => {
     // res.json(req.body);
     res.json(data.users);
 });
+
+
 
 app.listen(PORT, () => {
     console.log(`you port is http://localhost:${PORT}`);
