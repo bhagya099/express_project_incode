@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 4000;
 const data = require("./data");
 const bcrypt = require("bcrypt");
 
@@ -28,12 +28,16 @@ app.get("/users", (req, res) => {
 });
 
 app.get("/schedules", (req, res) => {
-    res.send(data.schedules);
+    res.render("pages/schedules", {
+        schedules: data.schedules,
+    });
 });
 
 // for getting users by user id number
 app.get("/users/:id", (req, res) => {
-    res.send(data.users[req.params.id]);
+    res.render("pages/user-id", {
+        userid: data.users[req.params.id],
+    });
 });
 
 // getting schedule by id
@@ -43,11 +47,11 @@ app.get("/users/:id/schedules", (req, res) => {
         (schedule) => schedule.user_id === Number(req.params.id)
     );
     if (found) {
-        res.send(
-            data.schedules.filter(
+        res.render("pages/schedules", {
+            schedules: data.schedules.filter(
                 (schedule) => schedule.user_id === Number(req.params.id)
-            )
-        );
+            ),
+        });
     } else {
         res.status(400).json({ msg: `No number with the id ${req.params.id}` });
     }
