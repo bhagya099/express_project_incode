@@ -19,3 +19,5 @@ Finally, you will integrate a database into your project so that the information
  This action plan will allow you to provide, in 3 steps, a prototype to the Mr.Coffee company.
  
  For completing this project I have to create a 3 branches to make this in 3 projects.
+
+To make this project I install "nodemon","express" and for recieving data i used "postman" and vscode extention "thunder"

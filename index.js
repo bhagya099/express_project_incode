@@ -3,7 +3,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const data = require("./data");
 const bcrypt = require("bcrypt");
-const parsers = require("body-parser");
+
 
 // body parser midlle ware
 app.use(express.json());
