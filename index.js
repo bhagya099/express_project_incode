@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 4006;
+const PORT = process.env.PORT || 4009;
 const data = require("./data");
 const bcrypt = require("bcrypt");
 
@@ -75,6 +75,14 @@ app.post("/users", (req, res) => {
         email,
         password: hash,
     };
+
+    if (!newUser.firstname ||
+        !newUser.lastname ||
+        !newUser.email ||
+        !newUser.password
+    ) {
+        return res.status(400).json({ msg: "Please fill all the field" });
+    }
     data.users.push(newUser);
     // res.json(newUser);
     // console.log(req.body);
