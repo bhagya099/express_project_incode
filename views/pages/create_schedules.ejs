@@ -10,12 +10,13 @@
 
 <body>
     <h1>Create your Schedules , Choose time</h1>
-    <form action="post">
+    <form action="/schedules" method="POST">
         <label for="start-time">Start At:</label>
         <input type="time" id="start-time" name="start_at" min="9:00" max="18:00">
 
         <label for="end-time">End At:</label>
-        <input type="time" id="start-time" name="start_at" min="9:00" max="18:00">
+        <input type="time" id="end-time" name="end_at" min="9:00" max="18:00">
+        <input type="submit" value="Submit">
     </form>
 </body>
 

@@ -84,6 +84,17 @@ app.post("/users", (req, res) => {
     res.redirect("/users");
 });
 
+app.post("/schedules", (req, res) => {
+    const { start_at, end_at } = req.body;
+    const newSchedule = {
+        start_at: start_at,
+        end_at: end_at,
+    };
+    data.schedules.push(newSchedule);
+    // res.json(data.schedules);
+    res.redirect("/schedules");
+});
+
 app.listen(PORT, () => {
     console.log(`you port is http://localhost:${PORT}`);
 });
