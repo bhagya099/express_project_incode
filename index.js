@@ -34,9 +34,14 @@ app.get("/schedules", (req, res) => {
 
 // for getting users by user id number
 app.get("/users/:id", (req, res) => {
-    res.render("pages/user-id", {
-        userid: data.users[req.params.id],
-    });
+
+    if (req.params.id == 'new') {
+        res.render("pages/form");
+    } else {
+        res.render("pages/user-id", {
+            userid: data.users[req.params.id],
+        });
+    }
 });
 
 // getting schedule by id
@@ -57,9 +62,9 @@ app.get("/users/:id/schedules", (req, res) => {
 });
 
 // for getting form for new users
-app.get("/new", (req, res) => {
-    res.render("pages/form");
-});
+// app.get("/new", (req, res) => {
+//     res.render("pages/form");
+// });
 
 app.get("/schedules/new", (req, res) => {
     res.render("pages/create_schedules");

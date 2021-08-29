@@ -12,7 +12,7 @@
     <!-- it is a header -->
     <h6>here is menu</h6>
     <%- include('../partials/header') %>
-        <h1>It's a users page</h1>
+        <h1>All Users Detalis</h1>
         <main>
             <% users.forEach(user=> { %>
                 <p> <strong> First Name : </strong>
@@ -28,7 +28,7 @@
                     <%= `${user.password}` %>
                 </p><br>
                 <% }) %>
-
+                    <button><a href="/users/new"> Create new Users </a></button>
         </main>
 </body>
 
