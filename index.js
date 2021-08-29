@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4006;
 const data = require("./data");
 const bcrypt = require("bcrypt");
 
@@ -12,14 +12,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
-// for getting form for new users
-app.get("/new", (req, res) => {
-    res.render("pages/form");
-});
 
-app.get("/schedules/new", (req, res) => {
-    res.render("pages/create_schedules");
-});
 // routes
 // rendering the index page
 app.get("/", (req, res) => {
@@ -63,6 +56,14 @@ app.get("/users/:id/schedules", (req, res) => {
     }
 });
 
+// for getting form for new users
+app.get("/new", (req, res) => {
+    res.render("pages/form");
+});
+
+app.get("/schedules/new", (req, res) => {
+    res.render("pages/create_schedules");
+});
 // post request
 app.post("/users", (req, res) => {
     const { firstname, lastname, email, password } = req.body;
@@ -79,7 +80,8 @@ app.post("/users", (req, res) => {
     // console.log(req.body);
     // console.log(newUser);
     // res.json(req.body);
-    res.json(data.users);
+    // res.json(data.users);
+    res.redirect("/users");
 });
 
 app.listen(PORT, () => {

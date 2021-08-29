@@ -10,15 +10,16 @@
 
 <body>
     <h1>Fill this Form</h1>
-    <form action="post">
+    <form action="/users" method="POST">
         <label for="firstname">Firstname</label>
         <input type="text" placeholder="First name" id="firstname" name="firstname">
         <label for="lastname">Lastname</label>
         <input type="text" placeholder="Last name" id="lastname">
         <label for="email">Email</label>
-        <input type="email" placeholder="Email address" id="email">
+        <input type="email" placeholder="Email address" id="email" name="email">
         <label for="password">Password</label>
-        <input type="text" placeholder="Create Password" id="password">
+        <input type="text" placeholder="Create Password" id="password" name="password">
+        <input type="submit" value="Submit">
     </form>
 
 
