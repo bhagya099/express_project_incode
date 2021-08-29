@@ -41,6 +41,7 @@ app.get("/users/:id", (req, res) => {
         // getting the users details using id
         res.render("pages/user-id", {
             userid: data.users[req.params.id],
+            id: req.params.id,
         });
     }
 });
