@@ -34,10 +34,11 @@ app.get("/schedules", (req, res) => {
 
 // for getting users by user id number
 app.get("/users/:id", (req, res) => {
-
-    if (req.params.id == 'new') {
+    //   getting the form page
+    if (req.params.id == "new") {
         res.render("pages/form");
     } else {
+        // getting the users details using id
         res.render("pages/user-id", {
             userid: data.users[req.params.id],
         });
@@ -60,12 +61,6 @@ app.get("/users/:id/schedules", (req, res) => {
         res.status(400).json({ msg: `No number with the id ${req.params.id}` });
     }
 });
-
-// for getting form for new users
-// app.get("/new", (req, res) => {
-//     res.render("pages/form");
-// });
-
 app.get("/schedules/new", (req, res) => {
     res.render("pages/create_schedules");
 });
@@ -86,8 +81,10 @@ app.post("/users", (req, res) => {
         !newUser.email ||
         !newUser.password
     ) {
+        console.log(newUser);
         return res.status(400).json({ msg: "Please fill all the field" });
     }
+    console.log(newUser);
     data.users.push(newUser);
     // res.json(newUser);
     // console.log(req.body);
