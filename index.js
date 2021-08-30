@@ -84,7 +84,7 @@ app.post("/users", (req, res) => {
         !newUser.email ||
         !newUser.password
     ) {
-        return res.status(400).json({ msg: "Please fill all the field" });
+        res.status(400).json({ msg: "Please fill all the field" });
     }
     console.log(newUser);
 
@@ -99,6 +99,9 @@ app.post("/schedules", (req, res) => {
         start_at: start_at,
         end_at: end_at,
     };
+    if (!newSchedule.start_at || !newSchedule.end_at) {
+        res.status(400).send({ msg: "Please selct time" });
+    }
     data.schedules.push(newSchedule);
     // res.json(data.schedules);
     res.redirect("/schedules");
