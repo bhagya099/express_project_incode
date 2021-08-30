@@ -3,16 +3,18 @@ const app = express();
 const PORT = process.env.PORT || 4009;
 const data = require("./data");
 const bcrypt = require("bcrypt");
+const path = require("path");
 
 // body parser midlle ware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // ejs
-
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 
+// for css and js file
+app.use(express.static(path.join(__dirname, "public")));
 // routes
 // rendering the index page
 app.get("/", (req, res) => {
@@ -82,16 +84,12 @@ app.post("/users", (req, res) => {
         !newUser.email ||
         !newUser.password
     ) {
-        console.log(newUser);
         return res.status(400).json({ msg: "Please fill all the field" });
     }
     console.log(newUser);
+
     data.users.push(newUser);
-    // res.json(newUser);
-    // console.log(req.body);
-    // console.log(newUser);
-    // res.json(req.body);
-    // res.json(data.users);
+
     res.redirect("/users");
 });
 
