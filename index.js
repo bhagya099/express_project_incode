@@ -1,47 +1,47 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 4009;
-const data = require("./data");
-const bcrypt = require("bcrypt");
-const path = require("path");
+const PORT = process.env.PORT || 4004;
+const data = require('./data');
+const bcrypt = require('bcrypt');
+const path = require('path');
 
 // body parser midlle ware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // ejs
-app.set("view engine", "ejs");
-app.use(express.static("public"));
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
 
 // for css and js file
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 // routes
 // rendering the index page
-app.get("/", (req, res) => {
+app.get('/', (req, res) => {
     // res.send(`<h1>Welcome to our schedule website</h1>`);
-    res.render("pages/index");
+    res.render('pages/index');
 });
 
-app.get("/users", (req, res) => {
-    res.render("pages/users", {
+app.get('/users', (req, res) => {
+    res.render('pages/users', {
         users: data.users,
     });
 });
 
-app.get("/schedules", (req, res) => {
-    res.render("pages/schedules", {
+app.get('/schedules', (req, res) => {
+    res.render('pages/schedules', {
         schedules: data.schedules,
     });
 });
 
 // for getting users by user id number
-app.get("/users/:id", (req, res) => {
+app.get('/users/:id', (req, res) => {
     //   getting the form page
-    if (req.params.id == "new") {
-        res.render("pages/form");
+    if (req.params.id == 'new') {
+        res.render('pages/form');
     } else {
         // getting the users details using id
-        res.render("pages/user-id", {
+        res.render('pages/user-id', {
             userid: data.users[req.params.id],
             id: req.params.id,
         });
@@ -49,13 +49,13 @@ app.get("/users/:id", (req, res) => {
 });
 
 // getting schedule by id
-app.get("/users/:id/schedules", (req, res) => {
+app.get('/users/:id/schedules', (req, res) => {
     // let id = 0;
     const found = data.schedules.some(
         (schedule) => schedule.user_id === Number(req.params.id)
     );
     if (found) {
-        res.render("pages/schedules", {
+        res.render('pages/schedules', {
             schedules: data.schedules.filter(
                 (schedule) => schedule.user_id === Number(req.params.id)
             ),
@@ -64,11 +64,11 @@ app.get("/users/:id/schedules", (req, res) => {
         res.status(400).json({ msg: `No number with the id ${req.params.id}` });
     }
 });
-app.get("/schedules/new", (req, res) => {
-    res.render("pages/create_schedules");
+app.get('/schedules/new', (req, res) => {
+    res.render('pages/create_schedules');
 });
 // post request
-app.post("/users", (req, res) => {
+app.post('/users', (req, res) => {
     const { firstname, lastname, email, password } = req.body;
     const salt = bcrypt.genSaltSync(10);
     const hash = bcrypt.hashSync(password, salt);
@@ -84,27 +84,29 @@ app.post("/users", (req, res) => {
         !newUser.email ||
         !newUser.password
     ) {
-        res.status(400).json({ msg: "Please fill all the field" });
+        res.status(400).json({ msg: 'Please fill all the field' });
     }
     console.log(newUser);
 
     data.users.push(newUser);
 
-    res.redirect("/users");
+    res.redirect('/users');
 });
 
-app.post("/schedules", (req, res) => {
-    const { start_at, end_at } = req.body;
+app.post('/schedules', (req, res) => {
+    const { user_id, day, start_at, end_at } = req.body;
     const newSchedule = {
+        user_id,
+        day,
         start_at: start_at,
         end_at: end_at,
     };
     if (!newSchedule.start_at || !newSchedule.end_at) {
-        res.status(400).send({ msg: "Please selct time" });
+        res.status(400).send({ msg: 'Please selct time' });
     }
     data.schedules.push(newSchedule);
     // res.json(data.schedules);
-    res.redirect("/schedules");
+    res.redirect('/schedules');
 });
 
 app.listen(PORT, () => {
