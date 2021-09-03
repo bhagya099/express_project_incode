@@ -1,1 +1,3 @@
+DROP DATABASE IF EXISTS test_post;
+
 CREATE DATABASE test_post;

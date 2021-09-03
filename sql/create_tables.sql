@@ -1,9 +1,13 @@
-
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY NOT NULL,
     firstname VARCHAR(255) NOT NULL,
     lastname VARCHAR(255) NOT NULL,
     email     VARCHAR(200) NOT NULL,
-    password CHAR(60) NOT NULL
+    password VARCHAR(60) NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS schedules (
+    
+)
