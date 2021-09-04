@@ -11,27 +11,30 @@
 </head>
 
 <body>
-    <h1>This is
-        <%= userid.firstname %> details,and your ID number is
-            <%= id %>
-    </h1>
-    <p>
-        Firstname:
-        <%= userid.firstname %>
-    </p>
-    <p>
-        Lastname:
-        <%= userid.lastname %>
-    </p>
-    <p>
-        Email:
-        <%= userid.email %>
-    </p>
-    <p>
-        Password:
-        <%= userid.password %>
-    </p>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <%- include('../partials/header.ejs') %>
+        <h1 class="text-center m-5">This is
+            <%= userid.firstname %> details,and your ID number is
+                <%= id %>
+        </h1>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <p>
+                Firstname:
+                <%= userid.firstname %>
+            </p>
+            <p>
+                Lastname:
+                <%= userid.lastname %>
+            </p>
+            <p>
+                Email:
+                <%= userid.email %>
+            </p>
+            <p>
+                Password:
+                <%= userid.password %>
+            </p>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>
