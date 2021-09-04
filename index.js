@@ -59,16 +59,23 @@ app.get('/users/:id', (req, res) => {
         res.render('pages/form');
     } else {
         // getting the users details using id
-        res.render('pages/user-id', {
-            userid: data.users[req.params.id],
-            id: req.params.id,
-        });
+        db.any('SELECT * FROM users;')
+            .then(users => {
+                console.log(users);
+                res.render('pages/user-id', {
+                    userid: users[req.params.id],
+                    id: req.params.id,
+                });
+
+            })
+            .catch(error => console.log(error));
     }
 });
 
 // getting schedule by id
 app.get('/users/:id/schedules', (req, res) => {
     // let id = 0;
+
     const found = data.schedules.some(
         (schedule) => schedule.user_id === Number(req.params.id)
     );
@@ -86,6 +93,7 @@ app.get('/schedules/new', (req, res) => {
     res.render('pages/create_schedules');
 });
 
+// for puting the information in databse and dipalying it
 app.post('/users', (req, res) => {
     console.log(req.body);
     db.none(
@@ -100,7 +108,7 @@ app.post('/users', (req, res) => {
         });
 });
 
-// /new rote to post schedule
+// /new route to post schedule
 app.post('/schedules/new', (req, res) => {
     console.log(req.body);
     db.none(

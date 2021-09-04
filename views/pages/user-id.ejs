@@ -11,26 +11,29 @@
 </head>
 
 <body>
-    <h1>This is
-        <%= userid.firstname %> details,and your ID number is
-            <%= id %>
-    </h1>
-    <p>
-        Firstname:
-        <%= userid.firstname %>
-    </p>
-    <p>
-        Lastname:
-        <%= userid.lastname %>
-    </p>
-    <p>
-        Email:
-        <%= userid.email %>
-    </p>
-    <p>
-        Password:
-        <%= userid.password %>
-    </p>
+    <%- include('../partials/header.ejs') %>
+        <h1 class="text-center m-5">This is
+            <%= userid.firstname %> details,and your ID number is
+                <%= id %>
+        </h1>
+        <div class="d-flex flex-column justify-content-center align-items-center">
+            <p>
+                Firstname:
+                <%= userid.firstname %>
+            </p>
+            <p>
+                Lastname:
+                <%= userid.lastname %>
+            </p>
+            <p>
+                Email:
+                <%= userid.email %>
+            </p>
+            <p>
+                Password:
+                <%= userid.password %>
+            </p>
+        </div>
 </body>
 
 </html>
