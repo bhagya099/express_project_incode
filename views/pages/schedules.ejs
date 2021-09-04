@@ -14,12 +14,14 @@
 
     <%- include('../partials/header') %>
         <main class="container">
-            <h1 class="text-center mt-2">Schedules Are:</h1>
+            <h1 class="text-center mt-3 mb-4">Schedules Are:</h1>
             <% schedules.forEach(schedule=> { %>
                 <p>
-                    Your schedule start time is
-                    <%= schedule.start_at %> and end time is
-                        <%= schedule.end_at %>
+                    &lt;
+                    <%= schedule.username %> - Your schedule start time is :
+                        <%= schedule.start_time %> - and end time is :
+                            <%= schedule.end_time %> &gt;
+
                 </p>
                 <% }) %>
                     <a href="/schedules/new" class="btn btn-secondary position-absolute mt-5" role="button">

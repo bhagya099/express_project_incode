@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 4008;
+const PORT = process.env.PORT || 5009;
 const data = require('./data');
 const bcrypt = require('bcrypt');
 const path = require('path');
@@ -39,9 +39,17 @@ app.get('/users', (req, res) => {
 });
 
 app.get('/schedules', (req, res) => {
-    res.render('pages/schedules', {
-        schedules: data.schedules,
-    });
+    db.any('SELECT * FROM schedules;')
+        .then((schedules) => {
+            console.log(schedules);
+            res.render('pages/schedules', {
+                schedules,
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+            res.send(error);
+        });
 });
 
 // for getting users by user id number
@@ -92,18 +100,16 @@ app.post('/users', (req, res) => {
         });
 });
 
-app.post("/schedules", (req, res) => {
-    const { start_at, end_at } = req.body;
-    const newSchedule = {
-        start_at: start_at,
-        end_at: end_at,
-    };
-    if (!newSchedule.start_at || !newSchedule.end_at) {
-        res.status(400).send({ msg: "Please selct time" });
-    }
-    data.schedules.push(newSchedule);
-    // res.json(data.schedules);
-    res.redirect("/schedules");
+// /new rote to post schedule
+app.post('/schedules/new', (req, res) => {
+    console.log(req.body);
+    db.none(
+            'INSERT INTO schedules (username, day, start_time, end_time) VALUES ($1, $2, $3, $4);', [req.body.username, req.body.day, req.body.start_time, req.body.end_time]
+        )
+        .then(() => {
+            res.redirect('/schedules');
+        })
+        .catch((error) => console.log(error));
 });
 
 app.listen(PORT, () => {

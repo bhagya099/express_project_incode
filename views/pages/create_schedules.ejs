@@ -14,12 +14,30 @@
     <%- include('../partials/header.ejs') %>
 
         <h1 class="text-center mt-3">Create your Schedules , Choose time</h1>
-        <form action="/schedules" method="POST" class="container m-4 position-absolute">
+        <form action="/schedules/new" method="POST" class="container m-4 position-absolute">
+            <label for="username" class="form-label">User Name :</label>
+            <input type="text" id="username" name="username" class="form-control">
+
+            <label for="day" class="form-label">Day</label>
+            <input type="day" id="day" name="day" class="form-control">
+
+            <!-- <label for="day" class="form-label mt-1">Day :</label>
+                                                  <select class="form-select mt-1 mb-2" aria-label="Default select example">
+                                                                                
+                                                                                    <option value="1">Monday</option>
+                                                                                    <option value="2">Tuesday</option>
+                                                                                    <option value="3">Wednesday</option>
+                                                                                    <option value="4">Thrusday</option>
+                                                                                    <option value="5">Friday</option>
+                                                                                    <option value="6">Sataurday</option>
+                                                                                    <option value="7">Sunday</option>
+                                                 </select> -->
+
             <label for="start-time" class="form-label">Start At:</label>
-            <input type="time" id="start-time" name="start_at" min="9:00" max="17:00" class="form-control">
+            <input type="time" id="start-time" name="start_time" min="9:00" max="17:00" class="form-control">
 
             <label for="end-time" class="form-label">End At:</label>
-            <input type="time" id="end-time" name="end_at" min="9:00" max="17:00" class="form-control">
+            <input type="time" id="end-time" name="end_time" min="9:00" max="17:00" class="form-control">
             <button type="submit" class="btn btn-secondary position-absolute top-100 start-50 mt-5">Submit</button>
             <!-- <input type="submit" value="Submit"> -->
         </form>
