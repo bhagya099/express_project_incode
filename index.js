@@ -42,6 +42,11 @@ app.get('/schedules', (req, res) => {
     db.any('SELECT * FROM schedules;')
         .then((schedules) => {
             console.log(schedules);
+            console.log(
+                schedules.forEach((sccheduleDay, i) =>
+                    console.log(`${sccheduleDay.day} ,${i}`)
+                )
+            );
             res.render('pages/schedules', {
                 schedules,
             });
