@@ -17,8 +17,19 @@
         <form action="/schedules" method="POST" class="container m-4 position-absolute">
             <label for="user_id" class="form-label">User Id</label>
             <input type="number" id="user_id" name="user_id" class="form-control">
+
             <label for="day" class="form-label">Day :</label>
-            <input type="text" id="day" name="day" class="form-control">
+            <select class="form-control mb-2" name="day" id="day">
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thrusday</option>
+                <option value="5">Friday</option>
+                <option value="6">Sataurday</option>
+                <option value="7">sunday</option>
+            
+            </select>
+
             <label for="start-time" class="form-label">Start At:</label>
             <input type="time" id="start-time" name="start_at" min="9:00" max="17:00" class="form-control">
 
