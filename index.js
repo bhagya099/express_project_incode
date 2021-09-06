@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const PORT = process.env.PORT || 5009;
+const PORT = process.env.PORT || 5008;
 const data = require('./data');
 const bcrypt = require('bcrypt');
 const path = require('path');
@@ -33,7 +33,7 @@ app.get('/users', (req, res) => {
             });
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
             res.send(error);
         });
 });
@@ -42,17 +42,12 @@ app.get('/schedules', (req, res) => {
     db.any('SELECT * FROM schedules;')
         .then((schedules) => {
             console.log(schedules);
-            console.log(
-                schedules.forEach((sccheduleDay, i) =>
-                    console.log(`${sccheduleDay.day} ,${i}`)
-                )
-            );
             res.render('pages/schedules', {
                 schedules,
             });
         })
         .catch((error) => {
-            console.log(error);
+            // console.log(error);
             res.send(error);
         });
 });

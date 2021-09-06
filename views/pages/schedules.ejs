@@ -15,13 +15,19 @@
     <%- include('../partials/header') %>
         <main class="container">
             <h1 class="text-center mt-3 mb-4">Schedules Are:</h1>
+
             <% schedules.forEach(schedule=> { %>
                 <p>
-                    &lt;
-                    <%= schedule.username %> - Your schedule start time is :
-                        <%= schedule.start_time %> - and end time is :
-                            <%= schedule.end_time %> on
-                                <%= schedule.day %> &gt;
+                    <!-- for giving days as a monday,tuesday.... -->
+                    <% if(schedule.day==1) { schedule.day='Monday' ; } else if (schedule.day==2) {schedule.day='Tuesday' } else if
+                        (schedule.day==3) {schedule.day='Wednesday' } else if (schedule.day==4) {schedule.day='Thrusday' } else if
+                        (schedule.day==5) {schedule.day='Friday' } else if (schedule.day==6) {schedule.day='Sataurday' } else if
+                        (schedule.day==7) {schedule.day='Sunday' }%>
+                        &lt;
+                        <%= schedule.username %> - Your schedule start time is :
+                            <%= schedule.start_time %> - and end time is :
+                                <%= schedule.end_time %> on
+                                    <%= schedule.day %> &gt;
 
                 </p>
                 <% }) %>
