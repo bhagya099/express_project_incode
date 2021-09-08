@@ -96,9 +96,10 @@ app.get('/schedules/new', (req, res) => {
 // for puting the information in databse and dipalying it
 app.post('/users', (req, res) => {
     console.log(req.body);
-
+    const salt = bcrypt.genSaltSync(10);
+    const hash = bcrypt.hashSync(req.body.password, salt);
     db.none(
-            'INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4);', [req.body.firstname, req.body.lastname, req.body.email, req.body.password]
+            'INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4);', [req.body.firstname, req.body.lastname, req.body.email, hash]
         )
         .then(() => {
             res.redirect('/users');
