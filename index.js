@@ -96,6 +96,7 @@ app.get('/schedules/new', (req, res) => {
 // for puting the information in databse and dipalying it
 app.post('/users', (req, res) => {
     console.log(req.body);
+
     db.none(
             'INSERT INTO users (firstname, lastname, email, password) VALUES ($1, $2, $3, $4);', [req.body.firstname, req.body.lastname, req.body.email, req.body.password]
         )

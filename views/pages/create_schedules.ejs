@@ -16,10 +16,10 @@
         <h1 class="text-center mt-3">Create your Schedules , Choose time</h1>
         <form action="/schedules/new" method="POST" class="container m-4 position-absolute">
             <label for="username" class="form-label">User Name :</label>
-            <input type="text" id="username" name="username" class="form-control">
+            <input type="text" id="username" name="username" class="form-control" required>
 
             <label for="day" class="form-label mt-1">Day :</label>
-            <select class="form-select mt-1 mb-2" aria-label="Default select example" name="day">
+            <select class="form-select mt-1 mb-2" aria-label="Default select example" name="day" required>
                                                                                 
                 <option value="1">Monday</option>
                 <option value="2">Tuesday</option>
@@ -31,12 +31,12 @@
             </select>
 
             <label for="start-time" class="form-label">Start At:</label>
-            <input type="time" id="start-time" name="start_time" min="9:00" max="17:00" class="form-control">
+            <input type="time" id="start-time" name="start_time" min="9:00" max="17:00" class="form-control" required>
 
             <label for="end-time" class="form-label">End At:</label>
-            <input type="time" id="end-time" name="end_time" min="9:00" max="17:00" class="form-control">
+            <input type="time" id="end-time" name="end_time" min="9:00" max="17:00" class="form-control" required>
             <button type="submit" class="btn btn-secondary position-absolute top-100 start-50 mt-5">Submit</button>
-            <!-- <input type="submit" value="Submit"> -->
+
         </form>
 </body>
 
